@@ -1,28 +1,45 @@
+/*
+How I describe functions?
+Example:
+---------------------------------------
+1 // foo(numer, string) -> array 
+2 function foo(num, str) {
+3    // something interesting
+4    return arr
+5 } 
+---------------------------------------
+This means that function "foo" takes two argument - number and string - and return array.
+*/
+
+
+// rot13(string) -> string
 function rot13(str) {
     const isUpper = checkUpper(str);
-    let strLower = str.toLowerCase();
-    console.log(lowerShift(strLower, 13));
-    /*
-    if (strArrLower.length !== strLower.length) {
-        console.log("Break!")
-        return undefined;
+    let arrLower = lowerShift(str, 13);
+    let arrStr = [];
+    for (let i = 0; i < arrLower.length; i++) {
+        if (isUpper[i]) {
+            arrStr.push(arrLower[i].toUpperCase());
+        } else {
+            arrStr.push(arrLower[i]);
+        }
     }
-    for (let i = 0; i < strArrLower.length; i++) {
-        //
-    }
-    */
-    console.log("OK");
-    // return strArrLower;
+    console.log(arrStr.join('')); // Just for test!
+    return arrStr.join('');
 }
 
+/* function lowerShift
+This function shift all char in string by 
+ BTW: This function it can be used for others shift then just 13 positions as rot13 needs.
+*/
+// lowerShift(string, number) -> string
 const lowerShift = (str, numShift) => {
     const maxLower = 122;
     const minLower = 97;
     const strArr = [];
     let charCode;
     for (let i = 0; i < str.length; i++) {
-        charCode = str.charCodeAt(i);
-        // console.log(charCode);
+        charCode = str.toLowerCase().charCodeAt(i);
         if (charCode <= maxLower && charCode >= minLower) {
             if (charCode + numShift <= maxLower) {
                 strArr.push(String.fromCharCode(charCode + numShift));
@@ -36,6 +53,11 @@ const lowerShift = (str, numShift) => {
     return strArr.join('');
 }
 
+
+/* function checkUpper
+This function takes string and return array of boolean 
+*/
+// Function "checkUpper(string) -> array
 const checkUpper = (str) => {
     let lowerArr = [];
     for (let i = 0; i < str.length; i++) {
@@ -47,7 +69,8 @@ const checkUpper = (str) => {
     }
     return lowerArr;
 }
-
-// lowerShift("SERR PBQR PNZC");
   
+// Tests
 rot13("SERR PBQR PNZC");
+rot13("SERR CVMMN!")
+rot13("Serr + CVMMn!!!");
